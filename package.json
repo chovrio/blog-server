@@ -1,0 +1,38 @@
+{
+  "name": "blog-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/main.ts",
+    "build": "webpack",
+    "prepare": "husky install",
+    "commit": "git-cz"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "babel-loader": "^9.1.2",
+    "commitizen": "^4.3.0",
+    "commitlint": "^17.4.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.3",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
