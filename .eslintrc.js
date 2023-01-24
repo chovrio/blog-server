@@ -12,6 +12,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
-    '@typescript-eslint/no-var-requires': 0
+    // 允许使用any
+    '@typescript-eslint/no-explicit-any': 0
   }
 }
