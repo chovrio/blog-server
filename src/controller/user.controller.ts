@@ -1,17 +1,13 @@
 import type { Middleware } from 'koa'
-import { JWT_SECRET } from '../config/config.default'
-import { getUserInfo } from '../service/user.service'
+import { JWT_SECRET, SERVER_RUNNiNG } from '../config/config.default'
+import { createUser, getUserInfo } from '../service/user.service'
 import jwt from 'jsonwebtoken'
 import { userLoginError, userRegisterError } from '../constant/err.type'
-import UserModel from '../model/user.model'
 
 export const register: Middleware = async ctx => {
   const { name, password } = ctx.request.body
   try {
-    const user = await UserModel.create({
-      name,
-      password
-    })
+    const user = await createUser({ name, password })
     ctx.body = {
       code: 200,
       message: '用户注册成功',
@@ -33,9 +29,7 @@ export const login: Middleware = async ctx => {
     // 从返回结果中提出password属性，将剩下的属性放到res对象
     const user = await getUserInfo(name)
     const obj = {
-      name: user?.name,
-      info: user?.info,
-      state: user?.state
+      name: user?.name
     }
     ctx.body = {
       code: 200,
@@ -47,5 +41,21 @@ export const login: Middleware = async ctx => {
   } catch (err) {
     console.error('用户登录失败', err)
     ctx.app.emit('error', userLoginError, ctx)
+  }
+}
+
+export const info: Middleware = async ctx => {
+  const { name } = ctx.state.user
+  const res = await getUserInfo(name)
+
+  ctx.body = {
+    code: 200,
+    message: '获取信息成功',
+    result: {
+      name,
+      info: res?.info,
+      avactor: `${<string>SERVER_RUNNiNG}/avactor/${res?.avactor}`,
+      state: res?.state
+    }
   }
 }

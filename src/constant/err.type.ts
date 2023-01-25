@@ -28,3 +28,31 @@ export const userLoginError = {
   message: '用户登录失败',
   result: '应该是服务器内部错误,长时间错误请联系管理员，谢谢🙏'
 }
+
+export const tokenExpiredError = {
+  code: 403,
+  message: 'token已过期',
+  result: ''
+}
+export const invalidToken = {
+  code: 403,
+  message: '无效的token',
+  result: ''
+}
+
+export const createFolderError = {
+  code: 500,
+  message: '创建文件夹失败，长时间错误请联系管理员，谢谢🙏',
+  result: ''
+}
+
+export const createFileError = {
+  code: 500,
+  message: '创建文件失败，长时间错误请联系管理员，谢谢🙏',
+  result: ''
+}
+export const publishDateError = {
+  code: 500,
+  message: '上传数据失败，长时间错误请联系管理员，谢谢🙏',
+  result: ''
+}

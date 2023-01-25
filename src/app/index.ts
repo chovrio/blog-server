@@ -2,6 +2,7 @@ import Koa from 'koa'
 import router from '../router'
 import koaBody from 'koa-body'
 import { HttpMethodEnum } from 'koa-body'
+import KoaStatic from 'koa-static'
 import path from 'path'
 import errHandler from './errHandler'
 // 导入实则在链接数据库
@@ -27,6 +28,7 @@ app
       ]
     })
   )
+  .use(KoaStatic(path.resolve(__dirname, '../upload')))
   .use(router.routes())
   .use(router.allowedMethods())
 

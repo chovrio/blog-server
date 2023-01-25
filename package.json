@@ -20,6 +20,7 @@
     "koa-body": "^6.0.1",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^12.0.0",
+    "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
     "mongoose": "^6.8.4"
   },
@@ -32,6 +33,7 @@
     "@types/jsonwebtoken": "^9.0.1",
     "@types/koa": "^2.13.5",
     "@types/koa-router": "^7.4.4",
+    "@types/koa-static": "^4.0.2",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.49.0",
     "@typescript-eslint/parser": "^5.49.0",

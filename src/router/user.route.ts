@@ -1,5 +1,6 @@
 import Router from 'koa-router'
-import { login, register } from '../controller/user.controller'
+import { auth } from '../middleware/user.middleware'
+import { info, login, register } from '../controller/user.controller'
 import {
   userValidator,
   verifyUser,
@@ -10,4 +11,6 @@ const userRouter = new Router({ prefix: '/user' })
 userRouter.post('/register', userValidator, verifyUser, register)
 // 登录接口
 userRouter.post('/login', userValidator, verifyLogin, login)
+// 获得用户信息接口
+userRouter.get('/info', auth, info)
 export default userRouter

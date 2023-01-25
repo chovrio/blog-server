@@ -1,8 +1,9 @@
 import Router from 'koa-router'
+import articleRouter from './article.route'
 import userRouter from './user.route'
 const router = new Router()
-router.use(userRouter.routes())
+router.use(userRouter.routes()).use(articleRouter.routes())
 router.get('/test', ctx => {
-  ctx.body = 'test'
+  ctx.body = 'test111'
 })
 export default router

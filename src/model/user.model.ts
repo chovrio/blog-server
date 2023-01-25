@@ -34,6 +34,11 @@ const userSchema = new mongoose.Schema({
     type: Number,
     require: false,
     default: 10
+  },
+  avactor: {
+    type: String,
+    require: false,
+    default: 'default.jpg'
   }
 })
 // 3.定义Model(与集合对应,可以操作集合)
