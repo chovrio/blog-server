@@ -56,3 +56,15 @@ export const publishDateError = {
   message: '上传数据失败，长时间错误请联系管理员，谢谢🙏',
   result: ''
 }
+
+export const RequestError = {
+  code: 500,
+  message: '请求失败，长时间错误请联系管理员，谢谢🙏',
+  result: ''
+}
+
+export const IdNotExist = {
+  code: 400,
+  message: '不存在该id的文章',
+  result: ''
+}
