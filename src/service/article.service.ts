@@ -32,3 +32,14 @@ export const getArticle = async (id: string) => {
   const article = res.filter(item => item.id === id)
   return article
 }
+export const deleteArticle = async (id: string) => {
+  const data = await getArticle(id)
+  const article = data[0]
+  const res = await ArticleModel.deleteOne({
+    name: article.name,
+    author: article.author,
+    createTime: article.createTime,
+    updateTime: article.updateTime
+  })
+  return res
+}
