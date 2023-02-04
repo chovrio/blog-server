@@ -8,6 +8,11 @@ const articleSchema = new mongoose.Schema({
     type: String,
     require: true
   },
+  tags: {
+    type: Array,
+    require: false,
+    default: ['无']
+  },
   createTime: {
     type: Number,
     require: true

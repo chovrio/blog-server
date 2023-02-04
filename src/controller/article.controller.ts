@@ -16,11 +16,12 @@ import {
 // 创建文章
 export const storageArticle: Middleware = async ctx => {
   const { name } = ctx.state.user
-  const { title, content } = ctx.request.body
+  const { title, content, tags } = ctx.request.body
   try {
     const res = await createArticle({
       name: title,
       author: name,
+      tags,
       createTime: new Date().getTime(),
       updateTime: new Date().getTime()
     })
@@ -130,6 +131,49 @@ export const deleteArticle: Middleware = async ctx => {
     }
   } catch (err) {
     console.error('删除文章失败', err)
+    ctx.app.emit('error', RequestError, ctx)
+  }
+}
+
+// 前台
+export const findAllArticlesFe: Middleware = async ctx => {
+  try {
+    const res = await getAllArticle(<string>ctx.query.name)
+    ctx.body = {
+      code: 200,
+      message: '获得文章成功',
+      result: res.reverse()
+    }
+  } catch (error) {
+    console.error('获得文章失败', error)
+    ctx.app.emit('error', RequestError, ctx)
+  }
+}
+export const getArticleContentFe: Middleware = async ctx => {
+  const { name } = ctx.query
+  console.log(ctx.query.id, ctx.query.name)
+  try {
+    const res = await getArticle(<string>ctx.query.id)
+    if (res.length === 0) {
+      return ctx.app.emit('error', IdNotExist, ctx)
+    }
+    const articleName = res[0].name + '-' + res[0].id
+    const article = fs.readFileSync(
+      path.resolve(__dirname, `../upload/articles/${name}/${articleName}.md`),
+      {
+        encoding: 'utf-8'
+      }
+    )
+    ctx.body = {
+      code: 200,
+      message: '获得文章内容成功',
+      result: {
+        info: res[0],
+        content: article
+      }
+    }
+  } catch (error) {
+    console.error('获得内容失败', error)
     ctx.app.emit('error', RequestError, ctx)
   }
 }

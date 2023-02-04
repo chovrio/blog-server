@@ -5,7 +5,9 @@ import {
   findOneArticle,
   getArticleContent,
   storageArticle,
-  deleteArticle
+  deleteArticle,
+  findAllArticlesFe,
+  getArticleContentFe
 } from '../controller/article.controller'
 import { auth } from '../middleware/user.middleware'
 
@@ -20,4 +22,10 @@ articleRouter.get('/acquire/:id', auth, findOneArticle)
 articleRouter.get('/content/:id', auth, getArticleContent)
 // 删除文章接口
 articleRouter.delete('/delete/:id', auth, deleteArticle)
+
+// 前台
+articleRouter.get('/acquire-fe', findAllArticlesFe)
+// 获得文章内容接口
+articleRouter.get('/content-fe', getArticleContentFe)
+
 export default articleRouter

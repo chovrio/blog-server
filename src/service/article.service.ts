@@ -3,6 +3,7 @@ import { getUserInfo } from './user.service'
 interface IArticle {
   name: string
   author: string
+  tags: string[]
   createTime: number
   updateTime: number
 }
@@ -10,6 +11,7 @@ export const createArticle = async (obj: IArticle) => {
   const res = await ArticleModel.create({
     name: obj.name,
     author: obj.author,
+    tags: obj.tags,
     createTime: obj.createTime,
     updateTime: obj.updateTime
   })
