@@ -1,5 +1,5 @@
 export interface error {
-  status: number
+  code: number
   message: string
   result: any
 }

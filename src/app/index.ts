@@ -15,7 +15,8 @@ app.use(
     origin: function (ctx) {
       const whiteList = [
         'https://blog-be.chovrio.club',
-        'https://blog-fe.chovrio.club'
+        'https://blog-fe.chovrio.club',
+        'http://localhost:3000/'
       ] //可跨域白名单
       let url = ''
       if (ctx.header.referer)

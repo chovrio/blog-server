@@ -40,3 +40,9 @@ export const verifyLogin: Middleware = async (ctx, next) => {
   }
   await next()
 }
+
+export const verifyFile: Middleware = async (ctx, next) => {
+  const { file } = ctx.request.body
+  console.log(file)
+  next()
+}

@@ -13,6 +13,7 @@ import {
   getArticle,
   deleteArticle as del
 } from '../service/article.service'
+import { findTrackDate } from '../service/tracker.service'
 // 创建文章
 export const storageArticle: Middleware = async ctx => {
   const { name } = ctx.state.user
@@ -157,6 +158,11 @@ export const getArticleContentFe: Middleware = async ctx => {
     if (res.length === 0) {
       return ctx.app.emit('error', IdNotExist, ctx)
     }
+    const data = await findTrackDate(
+      res[0].author as string,
+      res[0]._id as unknown as string
+    )
+    const pv = data?.pv || 0
     const articleName = res[0].name + '-' + res[0].id
     const article = fs.readFileSync(
       path.resolve(__dirname, `../upload/articles/${name}/${articleName}.md`),
@@ -169,6 +175,7 @@ export const getArticleContentFe: Middleware = async ctx => {
       message: '获得文章内容成功',
       result: {
         info: res[0],
+        pv: pv + 1,
         content: article
       }
     }
