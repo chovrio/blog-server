@@ -68,3 +68,20 @@ export const IdNotExist = {
   message: '不存在该id的文章',
   result: ''
 }
+
+export const unSupportedFileType = {
+  code: 400,
+  message: '不支持的文件格式',
+  result: ''
+}
+export const fileUploadError = {
+  code: 400,
+  message: '用户头像上传失败',
+  result: ''
+}
+
+export const getInfoError = {
+  code: 400,
+  meesage: '获取用户信息失败',
+  result: ''
+}

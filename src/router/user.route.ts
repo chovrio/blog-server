@@ -1,6 +1,6 @@
 import Router from 'koa-router'
 import { auth } from '../middleware/user.middleware'
-import { info, login, register } from '../controller/user.controller'
+import { getInfoFe, info, login, register } from '../controller/user.controller'
 import {
   userValidator,
   verifyUser,
@@ -17,3 +17,6 @@ userRouter.get('/info', auth, info)
 // 修改用户头像接口
 userRouter.post('/uploadactor', auth, verifyFile)
 export default userRouter
+// 前台
+// 获得用户总体信息接口
+userRouter.get('/all-fe', getInfoFe)

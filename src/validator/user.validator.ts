@@ -1,10 +1,13 @@
 import type { Middleware } from 'koa'
+import path from 'path'
 import bcryptjs from 'bcrypt'
 import {
   userAlreadyExited,
   userFormateError,
   userNotExited,
-  invalidPassword
+  invalidPassword,
+  unSupportedFileType,
+  fileUploadError
 } from '../constant/err.type'
 import { getUserInfo } from '../service/user.service'
 
@@ -42,7 +45,20 @@ export const verifyLogin: Middleware = async (ctx, next) => {
 }
 
 export const verifyFile: Middleware = async (ctx, next) => {
-  const { file } = ctx.request.body
-  console.log(file)
+  const { file }: any = ctx.request.files
+  const fileTypes = ['image/jpeg', 'image/png']
+  if (file) {
+    if (fileTypes.includes(file.mitetype))
+      return ctx.app.emit('error', unSupportedFileType, ctx)
+    ctx.body = {
+      code: 0,
+      message: '用户头像上传成功',
+      result: {
+        goods_img: path.basename(file.filepath)
+      }
+    }
+  } else {
+    return ctx.app.emit('error', fileUploadError, ctx)
+  }
   next()
 }

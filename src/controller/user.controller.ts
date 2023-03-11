@@ -1,8 +1,12 @@
 import type { Middleware } from 'koa'
 import { JWT_SECRET, SERVER_RUNNiNG } from '../config/config.default'
-import { createUser, getUserInfo } from '../service/user.service'
+import { createUser, getUserInfo, getUserInfoFe } from '../service/user.service'
 import jwt from 'jsonwebtoken'
-import { userLoginError, userRegisterError } from '../constant/err.type'
+import {
+  getInfoError,
+  userLoginError,
+  userRegisterError
+} from '../constant/err.type'
 
 export const register: Middleware = async ctx => {
   const { name, password } = ctx.request.body
@@ -57,5 +61,20 @@ export const info: Middleware = async ctx => {
       avactor: `${<string>SERVER_RUNNiNG}/avactor/${res?.avactor}`,
       state: res?.state
     }
+  }
+}
+
+// 前台
+export const getInfoFe: Middleware = async ctx => {
+  const { name } = ctx.query
+  try {
+    const res = await getUserInfoFe(name as string)
+    ctx.body = {
+      code: 200,
+      message: '获取信息成功',
+      result: res
+    }
+  } catch (e) {
+    ctx.app.emit('error', getInfoError, ctx)
   }
 }

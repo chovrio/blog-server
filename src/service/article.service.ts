@@ -7,6 +7,7 @@ interface IArticle {
   createTime: number
   updateTime: number
 }
+// 创建文章
 export const createArticle = async (obj: IArticle) => {
   const res = await ArticleModel.create({
     name: obj.name,
@@ -18,6 +19,7 @@ export const createArticle = async (obj: IArticle) => {
   return res
 }
 
+// 获得所有文章
 export const getAllArticle = async (author: string, flag = false) => {
   if (flag === true) {
     const info = await getUserInfo(author)
@@ -29,11 +31,13 @@ export const getAllArticle = async (author: string, flag = false) => {
   const res = await ArticleModel.find({ author })
   return res
 }
+// 获得指定文章
 export const getArticle = async (id: string) => {
   const res = await ArticleModel.find()
   const article = res.filter(item => item.id === id)
   return article
 }
+// 删除指定文章
 export const deleteArticle = async (id: string) => {
   const data = await getArticle(id)
   const article = data[0]
