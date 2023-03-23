@@ -85,3 +85,9 @@ export const getInfoError = {
   meesage: '获取用户信息失败',
   result: ''
 }
+
+export const InsufficientUserRights = {
+  code: 403,
+  message: '用户权限不足',
+  result: ''
+}

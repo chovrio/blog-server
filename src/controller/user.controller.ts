@@ -1,9 +1,16 @@
 import type { Middleware } from 'koa'
 import { JWT_SECRET, SERVER_RUNNiNG } from '../config/config.default'
-import { createUser, getUserInfo, getUserInfoFe } from '../service/user.service'
+import {
+  createUser,
+  delUser,
+  getUserInfo,
+  getUserInfoFe,
+  users
+} from '../service/user.service'
 import jwt from 'jsonwebtoken'
 import {
   getInfoError,
+  RequestError,
   userLoginError,
   userRegisterError
 } from '../constant/err.type'
@@ -51,7 +58,6 @@ export const login: Middleware = async ctx => {
 export const info: Middleware = async ctx => {
   const { name } = ctx.state.user
   const res = await getUserInfo(name)
-
   ctx.body = {
     code: 200,
     message: '获取信息成功',
@@ -63,7 +69,33 @@ export const info: Middleware = async ctx => {
     }
   }
 }
-
+// 获取用户列表
+export const getAllUser: Middleware = async ctx => {
+  try {
+    const res = await users()
+    ctx.body = {
+      code: 200,
+      message: '获得用户列表成功',
+      result: [...res]
+    }
+  } catch (e) {
+    ctx.app.emit('error', RequestError, ctx)
+  }
+}
+// 删除用户
+export const deleteUser: Middleware = async ctx => {
+  const { name } = ctx.request.body
+  try {
+    delUser(name)
+    ctx.body = {
+      code: 200,
+      message: '删除用户成功',
+      result: ''
+    }
+  } catch (e) {
+    ctx.app.emit('error', RequestError, ctx)
+  }
+}
 // 前台
 export const getInfoFe: Middleware = async ctx => {
   const { name } = ctx.query

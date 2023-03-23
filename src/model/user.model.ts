@@ -29,11 +29,11 @@ const userSchema = new mongoose.Schema({
     require: false,
     default: '这个用户很懒，什么也没留下'
   },
-  // 用户等级，默认为10，游客
+  // 用户等级，默认为3，普通用户
   state: {
     type: Number,
     require: false,
-    default: 10
+    default: 3
   },
   avactor: {
     type: String,

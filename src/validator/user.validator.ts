@@ -7,7 +7,8 @@ import {
   userNotExited,
   invalidPassword,
   unSupportedFileType,
-  fileUploadError
+  fileUploadError,
+  InsufficientUserRights
 } from '../constant/err.type'
 import { getUserInfo } from '../service/user.service'
 
@@ -61,4 +62,12 @@ export const verifyFile: Middleware = async (ctx, next) => {
     return ctx.app.emit('error', fileUploadError, ctx)
   }
   next()
+}
+
+export const verifyIdenty: Middleware = async (ctx, next) => {
+  const name = ctx.state.user.name
+  const res = await getUserInfo(name)
+  if (res?.state === 0) {
+    await next()
+  } else ctx.app.emit('error', InsufficientUserRights, ctx)
 }
