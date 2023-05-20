@@ -6,7 +6,7 @@ import KoaStatic from 'koa-static'
 import path from 'path'
 import errHandler from './errHandler'
 import cors from 'koa2-cors'
-// 导入实则在链接数据库
+// 导入,实则在链接数据库
 import '../db'
 const app = new Koa()
 
