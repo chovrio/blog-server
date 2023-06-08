@@ -24,7 +24,7 @@ app.use(
       if (whiteList.includes(url)) {
         return url //注意，这里域名末尾不能带/，否则不成功，所以在之前我把/通过substr干掉了
       }
-      return 'http://localhost::5173' //默认允许本地请求3000端口可跨域
+      return 'http://localhost:5173' //默认允许本地请求5173端口可跨域
     },
     maxAge: 5, //指定本次预检请求的有效期，单位为秒。
     credentials: true, //是否允许发送Cookie
